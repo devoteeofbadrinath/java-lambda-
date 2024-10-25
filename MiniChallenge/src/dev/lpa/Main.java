@@ -1,20 +1,44 @@
 package dev.lpa;
 
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class Main {
     public static void main(String[] args) {
-        Consumer<String> printTheParts = sentence -> {
+        Consumer<String> printWords = new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                String[] parts = s.split(" ");
+                for(String part : parts) {
+                    System.out.println(part);
+                }
+
+            }
+        };
+
+        Consumer<String> printWordsLambda = sentence -> {
             String[] parts = sentence.split(" ");
             for(String part : parts) {
                 System.out.println(part);
             }
             };
 
-        applyLambda("Badrinath Rameshwaram DwarkaDhish JagganathPuri", printTheParts);
-        printTheParts.accept("Badrinath Rameshwaram DwarkaDhish JagganathPuri");
+        printWords.accept("Let's split this up into an array");
+        printWordsLambda.accept("Let's split this up into an array");
 
-        
+        Consumer<String> printWordsForEach = sentence -> {
+            String[] words = sentence.split(" ");
+            //Arrays.stream(words).toList().forEach(s -> System.out.println(s));
+            Arrays.asList(words).forEach(s -> System.out.println(s));
+
+        };
+        printWordsForEach.accept("Let's split this up into an array");
+
+        Consumer<String> printWordsConcise = sentence -> {
+            Arrays.asList(sentence.split(" ")).forEach(s -> System.out.println(s));
+        };
+        printWordsForEach.accept("Let's split this up into an array");
+
     }
 
     public static void applyLambda(String name,Consumer<String> consumer ){
