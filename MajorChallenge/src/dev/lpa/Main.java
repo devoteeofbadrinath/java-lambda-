@@ -12,13 +12,24 @@ public class Main {
     public static void main(String[] args) {
         String[] names = {"bAdRiNatH","RamEShwArAM","DwaRKADhisH","JaggaNaTHPURI","bOb","ShIVAm","DeVEd"};
         Arrays.setAll(names, i -> names[i].toUpperCase());
+        System.out.println("--> Transform to UpperCase");
         System.out.println(Arrays.toString(names));
-        //ArrayList<String> list = List.copyOf(Arrays.asList(names));
-        //list.replaceAll(s -> s.toLowerCase());
-        //System.out.println(Arrays.toString(names));
-        Arrays.setAll(names, i -> names[i] + " " + reverseString(names[i]));
-        //System.out.println(reverseString(names[0]));
+
+        List<String> backedByArray = Arrays.asList(names);
+        backedByArray.replaceAll(s -> s += " "  + getRandomChar('A', 'D') + ".");
+        System.out.println("--> Add random middle initial");
         System.out.println(Arrays.toString(names));
+
+        backedByArray.replaceAll(s -> s += " " + getReversedName(s.split(" ")[0]) );
+        System.out.println("--> Add reversed name as last name");
+        Arrays.asList(names).forEach(s -> System.out.println(s));
+
+        List<String> newList = new ArrayList<>(List.of(names));
+        newList.removeIf(s -> s.substring(0, s.indexOf(" ")).equals(s.substring(s.lastIndexOf(" ") + 1)));
+        //backedByArray.removeIf(s -> s.substring(0, s.indexOf(" ")).equals(s.substring(s.lastIndexOf(" ") + 1)));
+        System.out.println("--> Remove names where first = last");
+        newList.forEach(s -> System.out.println(s));
+
     }
 
     public static String reverseString(String input){
@@ -27,5 +38,13 @@ public class Main {
             outputString = outputString + input.charAt(i);
         }
         return outputString;
+    }
+
+    public static char getRandomChar(char startChar, char endChar){
+        return (char)random.nextInt((int) startChar, (int) endChar + 1);
+    }
+
+    public static String getReversedName(String firstName){
+        return new StringBuilder(firstName).reverse().toString();
     }
 }
