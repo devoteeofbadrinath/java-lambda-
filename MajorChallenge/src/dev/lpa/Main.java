@@ -28,6 +28,7 @@ public class Main {
         newList.removeIf(s -> s.substring(0, s.indexOf(" ")).equals(s.substring(s.lastIndexOf(" ") + 1)));
         //backedByArray.removeIf(s -> s.substring(0, s.indexOf(" ")).equals(s.substring(s.lastIndexOf(" ") + 1)));
         System.out.println("--> Remove names where first = last");
+        System.out.println("--> Remove names where first = last");
         newList.forEach(s -> System.out.println(s));
 
     }
